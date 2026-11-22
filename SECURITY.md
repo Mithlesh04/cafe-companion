@@ -20,8 +20,8 @@ Public web app in a café: anonymous customers on shared Wi-Fi, one staff device
 | Abuse limits | fixed-window per-IP rate limits, tighter on chat (30/min), feedback and connect (10/min) | `src/lib/security/rateLimit.ts` |
 | Prompt safety | guardrailed system prompts, injection heuristic flag passed to the model, side effects only via typed tools, schema-validated JSON output, menu id validation, dietary filter re-applied post-model | `src/lib/ai/*` |
 | Headers | CSP (self only, no third-party scripts), `frame-ancestors 'none'`, nosniff, referrer policy, HSTS, `x-powered-by` removed | `next.config.ts` |
-| Secrets | env only, validated once, never logged, `.env*` git-ignored, Secret Manager in cloud | `src/lib/env.ts`, deploy workflow |
-| Supply chain | lockfile, `pnpm audit` in CI, Dependabot weekly, CodeQL on push and weekly | `.github/` |
+| Secrets | env only, validated once, never logged, `.env*` git-ignored, hosting env vars in production | `src/lib/env.ts` |
+| Supply chain | lockfile, `pnpm audit --prod` run locally before a release (no GitHub Actions in this repo) | `package.json` |
 | Container | multi-stage build, non-root user, standalone output, healthcheck | `Dockerfile` |
 
 ## Privacy

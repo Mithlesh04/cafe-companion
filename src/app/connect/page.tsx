@@ -59,7 +59,7 @@ export default function ConnectPage() {
         ) : (
           <ul className="grid gap-3 sm:grid-cols-2">
             {result.matches.map((m) => (
-              <li key={m.profile.id} className="card rise p-4">
+              <li key={m.profile.id} className="card animate-rise p-4">
                 <div className="flex items-center justify-between">
                   <p className="font-semibold">{m.profile.displayName}</p>
                   <Badge tone="brand">{Math.round(m.score * 100)}% overlap</Badge>

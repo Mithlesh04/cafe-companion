@@ -104,23 +104,23 @@ export function Chat({ cart, prefs, customerName, onCart, onOrder }: Props) {
   };
 
   return (
-    <div className="flex h-[70vh] min-h-[480px] flex-col">
+    <div className="flex h-[65vh] min-h-[420px] flex-col sm:h-[70vh] sm:min-h-[480px]">
       <div className="flex items-center justify-between pb-2">
         <p className="text-xs font-semibold uppercase tracking-wide text-mocha">Conversation</p>
         <ModeBadge mode={mode} />
       </div>
       <div role="log" aria-live="polite" aria-relevant="additions" className="flex-1 space-y-3 overflow-y-auto pr-1">
         {messages.map((m, i) => (
-          <div key={i} className={`rise flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+          <div key={i} className={`animate-rise flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
             <div className={`max-w-[85%] px-4 py-2.5 text-sm leading-relaxed ${m.role === "user" ? "bubble-user" : "bubble-bot"}`}>{m.content}</div>
           </div>
         ))}
         {busy && (
           <div className="flex justify-start">
-            <div className="bubble-bot px-4 py-3 typing" aria-label="Companion is typing">
-              <span />
-              <span />
-              <span />
+            <div className="bubble-bot flex items-center gap-1 px-4 py-3" aria-label="Companion is typing">
+              {[0, 150, 300].map((delay) => (
+                <span key={delay} className="h-1.5 w-1.5 rounded-full bg-mocha animate-pulse-dot" style={{ animationDelay: `${delay}ms` }} />
+              ))}
             </div>
           </div>
         )}

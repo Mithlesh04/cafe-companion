@@ -16,14 +16,15 @@ export function Nav() {
   const path = usePathname();
   return (
     <header className="sticky top-0 z-40 border-b border-espresso/10 bg-cream/80 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 h-14">
-        <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight text-espresso">
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-2 px-3 sm:gap-4 sm:px-6">
+        <Link href="/" className="flex shrink-0 items-center gap-2 whitespace-nowrap font-semibold tracking-tight text-espresso">
           <span className="grid h-8 w-8 place-items-center rounded-xl bg-espresso text-cream">
             <Coffee size={16} aria-hidden />
           </span>
-          <span>Café Companion</span>
+          <span className="hidden min-[400px]:inline">Café Companion</span>
+          <span className="sr-only min-[400px]:hidden">Café Companion home</span>
         </Link>
-        <nav aria-label="Primary" className="flex items-center gap-1 overflow-x-auto">
+        <nav aria-label="Primary" className="flex shrink-0 items-center gap-0.5 sm:gap-1">
           {LINKS.map(({ href, label, icon: Icon }) => {
             const active = path === href || path.startsWith(href + "/");
             return (
@@ -31,7 +32,7 @@ export function Nav() {
                 key={href}
                 href={href}
                 aria-current={active ? "page" : undefined}
-                className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm transition ${
+                className={`flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm transition sm:px-3 ${
                   active ? "bg-espresso text-cream" : "text-espresso-2 hover:bg-cream-2"
                 }`}
               >

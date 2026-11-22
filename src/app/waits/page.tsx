@@ -61,7 +61,7 @@ function Tracker() {
         </p>
       )}
       {order && (
-        <div className="rise mt-4 space-y-2 text-sm" aria-live="polite">
+        <div className="animate-rise mt-4 space-y-2 text-sm" aria-live="polite">
           <div className="flex items-center justify-between">
             <p className="font-semibold">{order.customerName}</p>
             <Badge tone={STATUS_TONE[order.status]}>{order.status}</Badge>
@@ -89,11 +89,13 @@ function LoadChart() {
     <Card>
       <h2 className="font-semibold">Typical busyness</h2>
       <p className="text-xs text-mocha mb-4">From this café&apos;s footfall. Shorter bar, shorter wait.</p>
-      <div className="flex items-end gap-1 h-32" role="img" aria-label="Bar chart of typical busyness by hour from 7am to 9pm">
+      <div className="flex h-36 items-end gap-1" role="img" aria-label="Bar chart of typical busyness by hour from 7am to 9pm">
         {hours.map(({ h, v }) => (
-          <div key={h} className="flex-1 flex flex-col items-center gap-1">
-            <div className={`w-full rounded-t-md transition ${h === now ? "bg-terracotta" : "bg-latte"}`} style={{ height: `${Math.max(6, v * 100)}%` }} title={`${h}:00`} />
-            <span className={`text-[10px] ${h === now ? "font-semibold text-terracotta" : "text-mocha"}`}>{h % 3 === 0 ? `${((h + 11) % 12) + 1}${h < 12 ? "a" : "p"}` : ""}</span>
+          <div key={h} className="flex h-full flex-1 flex-col items-center gap-1">
+            <div className="flex w-full flex-1 items-end">
+              <div className={`w-full rounded-t-md transition ${h === now ? "bg-terracotta" : "bg-latte"}`} style={{ height: `${Math.max(6, v * 100)}%` }} title={`${h}:00`} />
+            </div>
+            <span className={`h-4 text-[10px] ${h === now ? "font-semibold text-terracotta" : "text-mocha"}`}>{h % 3 === 0 ? `${((h + 11) % 12) + 1}${h < 12 ? "a" : "p"}` : ""}</span>
           </div>
         ))}
       </div>

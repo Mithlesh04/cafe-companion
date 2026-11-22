@@ -7,7 +7,7 @@
  ├── /order /discover /waits /connect /feedback /staff      client pages
  └── fetch → /api/*                                         JSON over HTTPS
                      │
- Next.js server (Node 24, standalone, Cloud Run container)
+ Next.js server (Node 24; Vercel functions or the standalone Cloud Run container)
  ├── src/lib/api.ts         zod schemas, rate limit, staff PIN, JSON helpers
  ├── src/lib/ai/*           ordering agent, recommend, waits, sentiment, connect
  │     └── src/lib/gemini.ts  thin wrapper: JSON mode + function calling, 20s timeout
@@ -43,7 +43,7 @@ See `src/lib/types.ts`. Key entities: `MenuItem`, `Preferences` (client only), `
 
 ## Persistence
 
-`Store` interface in `src/lib/store/types.ts`. `MemoryStore` is default; `FirestoreStore` activates with `FIRESTORE_ENABLED=true` and uses Application Default Credentials (no key file on Cloud Run). Collections are prefixed `cafe_` so a pilot and production can share a project. The store is a `globalThis` singleton to survive dev hot reloads.
+`Store` interface in `src/lib/store/types.ts`. `MemoryStore` is default; `FirestoreStore` activates with `FIRESTORE_ENABLED=true` and authenticates with `FIREBASE_SERVICE_ACCOUNT` (serverless hosts) or Application Default Credentials (Cloud Run). Collections are prefixed `cafe_` so a pilot and production can share a project. The store is a `globalThis` singleton to survive dev hot reloads.
 
 ## Security controls
 
@@ -56,7 +56,7 @@ See `src/lib/types.ts`. Key entities: `MenuItem`, `Preferences` (client only), `
 
 ## Scaling notes
 
-- Cloud Run 0..4 instances, 512 MiB, concurrency 80 is plenty for a café. Gemini calls dominate latency (1 to 3 s); the UI shows typing indicators.
+- Vercel Hobby or Cloud Run 0..4 instances is plenty for a café. Gemini calls dominate latency (1 to 3 s); the UI shows typing indicators.
 - For multi-instance correctness move the rate limiter to Memorystore and add a Firestore transaction around order id generation (ids are random 8-hex today, collision risk negligible at café scale).
 - Menu is a seed file; the obvious next step is a `cafe_menu` collection and a staff editor.
 

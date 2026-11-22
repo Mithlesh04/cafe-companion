@@ -18,5 +18,10 @@ Next.js 16 App Router, TypeScript strict, Tailwind 4, pnpm. Gemini via `@google/
 - Copy: short sentences, no emojis, barista voice. See `docs/UX.md`.
 - Add a unit test with any change to `src/lib/ai/*`; add an e2e step if a journey changes.
 
+## Repo rules
+- No GitHub Actions workflows: the account has no spare minutes. Run checks locally; Vercel builds on push.
+- Styling is Tailwind only: tokens in `@theme`, shared classes as `@utility` in `globals.css`, no ad hoc CSS files.
+- Every page must work at 360px wide; check with the Pixel 7 Playwright project.
+
 ## Skills
 `run`, `test`, `deploy`, `security-check`, `pilot-report` in `.claude/skills`.

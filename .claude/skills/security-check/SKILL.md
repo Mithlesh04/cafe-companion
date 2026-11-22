@@ -42,4 +42,4 @@ Staff-only: `GET /api/orders`, `PATCH /api/orders/[id]`, `GET /api/feedback`, `P
 - Logs never print env values or request bodies.
 
 ## 8. Report
-Write findings to `docs/SECURITY-REVIEW-<date>.md` with severity, file:line, and fix. Open issues for anything not fixed in the same change.
+Write findings to `docs/SECURITY-REVIEW-<date>.md` with severity, file:line, and fix. Open issues for anything not fixed in the same change. There is no GitHub Actions pipeline; these checks run locally.

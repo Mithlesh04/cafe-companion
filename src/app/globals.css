@@ -1,146 +1,96 @@
 @import "tailwindcss";
 
-:root {
-  --cream: #faf6f0;
-  --cream-2: #f1e9dd;
-  --espresso: #2b1d14;
-  --espresso-2: #4a3426;
-  --mocha: #7a5a44;
-  --latte: #c9a98c;
-  --terracotta: #c75b39;
-  --terracotta-2: #a94a2c;
-  --sage: #5f7f63;
-  --sage-2: #e4ecE3;
-  --gold: #d9a441;
-  --danger: #b4322a;
-  --ring: rgba(199, 91, 57, 0.35);
-}
+/* Design tokens. Everything below is Tailwind: @theme feeds utilities like
+   bg-espresso, text-mocha, animate-rise; @utility defines the few composed
+   classes we reuse across components. */
+@theme {
+  --color-cream: #faf6f0;
+  --color-cream-2: #f1e9dd;
+  --color-espresso: #2b1d14;
+  --color-espresso-2: #4a3426;
+  --color-mocha: #7a5a44;
+  --color-latte: #c9a98c;
+  --color-terracotta: #c75b39;
+  --color-terracotta-2: #a94a2c;
+  --color-sage: #5f7f63;
+  --color-sage-2: #e4ece3;
+  --color-gold: #d9a441;
+  --color-danger: #b4322a;
 
-@theme inline {
-  --color-cream: var(--cream);
-  --color-cream-2: var(--cream-2);
-  --color-espresso: var(--espresso);
-  --color-espresso-2: var(--espresso-2);
-  --color-mocha: var(--mocha);
-  --color-latte: var(--latte);
-  --color-terracotta: var(--terracotta);
-  --color-terracotta-2: var(--terracotta-2);
-  --color-sage: var(--sage);
-  --color-sage-2: var(--sage-2);
-  --color-gold: var(--gold);
-  --color-danger: var(--danger);
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-}
 
-html {
-  color-scheme: light;
-}
+  --radius-card: 1.25rem;
+  --shadow-card: 0 1px 2px rgba(43, 29, 20, 0.04), 0 12px 32px -20px rgba(43, 29, 20, 0.25);
 
-body {
-  background:
-    radial-gradient(1200px 600px at 10% -10%, #fff7ea 0%, transparent 60%),
-    radial-gradient(900px 500px at 110% 10%, #f3e6d8 0%, transparent 55%),
-    var(--cream);
-  color: var(--espresso);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-}
+  --animate-rise: rise 240ms ease-out both;
+  --animate-pulse-dot: pulse-dot 1s infinite;
 
-::selection {
-  background: var(--latte);
-  color: var(--espresso);
-}
-
-:focus-visible {
-  outline: 3px solid var(--ring);
-  outline-offset: 2px;
-  border-radius: 8px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+    50% {
+      opacity: 1;
+    }
   }
 }
 
-.card {
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(43, 29, 20, 0.08);
-  border-radius: 20px;
-  box-shadow: 0 1px 2px rgba(43, 29, 20, 0.04), 0 12px 32px -20px rgba(43, 29, 20, 0.25);
-  backdrop-filter: blur(6px);
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.3rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  border: 1px solid rgba(43, 29, 20, 0.12);
-  background: #fff;
-  color: var(--espresso-2);
-  transition: all 120ms ease;
-}
-.chip[aria-pressed="true"],
-.chip[data-on="true"] {
-  background: var(--espresso);
-  border-color: var(--espresso);
-  color: var(--cream);
-}
-
-.bubble-user {
-  background: var(--espresso);
-  color: var(--cream);
-  border-radius: 18px 18px 4px 18px;
-}
-.bubble-bot {
-  background: #fff;
-  border: 1px solid rgba(43, 29, 20, 0.08);
-  border-radius: 18px 18px 18px 4px;
-}
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
+@layer base {
+  html {
+    color-scheme: light;
   }
-  to {
-    opacity: 1;
-    transform: none;
+  body {
+    @apply bg-cream text-espresso font-sans antialiased;
+    background-image:
+      radial-gradient(1200px 600px at 10% -10%, #fff7ea 0%, transparent 60%),
+      radial-gradient(900px 500px at 110% 10%, #f3e6d8 0%, transparent 55%);
+  }
+  ::selection {
+    @apply bg-latte text-espresso;
+  }
+  :focus-visible {
+    @apply outline-3 outline-offset-2 outline-terracotta/35 rounded-lg;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
-.rise {
-  animation: rise 240ms ease-out both;
+
+/* Surface used by every panel. */
+@utility card {
+  @apply rounded-card border border-espresso/10 bg-white/80 shadow-card backdrop-blur-sm;
 }
 
-@keyframes pulse-dot {
-  0%,
-  100% {
-    opacity: 0.35;
+/* Toggle chip: a real <button> with aria-pressed. */
+@utility chip {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-espresso/15 bg-white px-3 py-1.5 text-sm font-medium text-espresso-2 transition-colors;
+  @apply hover:bg-cream-2 disabled:cursor-not-allowed disabled:opacity-50;
+  &[aria-pressed="true"] {
+    @apply border-espresso bg-espresso text-cream;
   }
-  50% {
-    opacity: 1;
-  }
 }
-.typing span {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin: 0 2px;
-  border-radius: 50%;
-  background: var(--mocha);
-  animation: pulse-dot 1s infinite;
+
+@utility bubble-user {
+  @apply rounded-[18px_18px_4px_18px] bg-espresso text-cream;
 }
-.typing span:nth-child(2) {
-  animation-delay: 0.15s;
-}
-.typing span:nth-child(3) {
-  animation-delay: 0.3s;
+
+@utility bubble-bot {
+  @apply rounded-[18px_18px_18px_4px] border border-espresso/10 bg-white;
 }

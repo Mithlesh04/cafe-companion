@@ -51,7 +51,7 @@ export default function OrderPage() {
 
         <div className="space-y-6">
           {order && (
-            <Card className="rise border-sage/40 bg-sage-2/60">
+            <Card className="animate-rise border-sage/40 bg-sage-2/60">
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="text-sage shrink-0" />
                 <div className="text-sm">
@@ -68,7 +68,7 @@ export default function OrderPage() {
           )}
 
           <Card>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <h2 className="font-semibold">Your cart</h2>
               <label className="text-xs text-mocha">
                 Name{" "}

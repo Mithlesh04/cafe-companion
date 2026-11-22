@@ -1,18 +1,35 @@
-import { Firestore } from "@google-cloud/firestore";
+import { Firestore, type Settings } from "@google-cloud/firestore";
 import type { ConnectProfile, Feedback, Order } from "../types";
 import type { Store } from "./types";
 
 /**
- * Firestore-backed store (Google Cloud). Uses Application Default Credentials,
- * so on Cloud Run it needs no key file. Collections are prefixed so one project
- * can host several cafés or a pilot and production side by side.
+ * Firestore-backed store (Google Cloud / Firebase Spark free tier).
+ *
+ * Credentials, in order of preference:
+ * 1. FIREBASE_SERVICE_ACCOUNT: base64 or raw JSON of a service account key.
+ *    This is what serverless hosts like Vercel need.
+ * 2. Application Default Credentials (Cloud Run, local gcloud auth).
+ *
+ * Collections are prefixed so one project can host a pilot and production.
  */
+export function firestoreSettings(projectId?: string, serviceAccount?: string): Settings {
+  const settings: Settings = {};
+  if (projectId) settings.projectId = projectId;
+  if (serviceAccount) {
+    const raw = serviceAccount.trim().startsWith("{") ? serviceAccount : Buffer.from(serviceAccount, "base64").toString("utf8");
+    const key = JSON.parse(raw) as { project_id?: string; client_email: string; private_key: string };
+    settings.projectId = settings.projectId ?? key.project_id;
+    settings.credentials = { client_email: key.client_email, private_key: key.private_key.replace(/\\n/g, "\n") };
+  }
+  return settings;
+}
+
 export class FirestoreStore implements Store {
   private db: Firestore;
   private prefix: string;
 
-  constructor(projectId?: string, prefix = "cafe") {
-    this.db = new Firestore(projectId ? { projectId } : undefined);
+  constructor(projectId?: string, serviceAccount?: string, prefix = "cafe") {
+    this.db = new Firestore(firestoreSettings(projectId, serviceAccount));
     this.prefix = prefix;
   }
 

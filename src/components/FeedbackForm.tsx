@@ -31,7 +31,7 @@ export function FeedbackForm({ compact = false }: { compact?: boolean }) {
   if (done) {
     const f = done.feedback;
     return (
-      <div className="rise space-y-2 text-sm" aria-live="polite">
+      <div className="animate-rise space-y-2 text-sm" aria-live="polite">
         <p className="font-medium">Thank you. The team sees this straight away.</p>
         <p className="text-mocha">
           Read as <strong>{f.sentiment}</strong>

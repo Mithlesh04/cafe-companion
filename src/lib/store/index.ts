@@ -17,7 +17,7 @@ export async function getStore(): Promise<Store> {
   const e = env();
   if (e.FIRESTORE_ENABLED === "true") {
     const { FirestoreStore } = await import("./firestore");
-    globalThis.__cafeStore = new FirestoreStore(e.GOOGLE_CLOUD_PROJECT);
+    globalThis.__cafeStore = new FirestoreStore(e.GOOGLE_CLOUD_PROJECT, e.FIREBASE_SERVICE_ACCOUNT);
   } else {
     globalThis.__cafeStore = new MemoryStore();
   }

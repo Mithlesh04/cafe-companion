@@ -97,7 +97,7 @@ export default function StaffPage() {
     <div>
       <div className="flex flex-wrap items-end justify-between gap-3">
         <PageTitle eyebrow="Staff" title="Shift view" />
-        <div className="flex gap-2 pb-6">
+        <div className="flex flex-wrap gap-2 pb-6">
           <Button variant="secondary" onClick={load}>
             <RefreshCw size={14} aria-hidden /> Refresh
           </Button>
@@ -127,9 +127,9 @@ export default function StaffPage() {
           ) : (
             <ul className="space-y-3">
               {active.map((o) => (
-                <li key={o.id} className="card p-4 flex items-start gap-4">
+                <li key={o.id} className="card p-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       <p className="font-semibold">{o.customerName}</p>
                       <Badge tone={o.status === "ready" ? "good" : o.status === "preparing" ? "warn" : "neutral"}>{o.status}</Badge>
                       <span className="text-xs text-mocha font-mono">{o.id}</span>
@@ -141,7 +141,11 @@ export default function StaffPage() {
                       {formatPrice(o.totalCents)} · promised {o.etaMinutes} min · {new Date(o.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                     </p>
                   </div>
-                  {NEXT[o.status] && <Button onClick={() => advance(o)}>{NEXT[o.status]!.label}</Button>}
+                  {NEXT[o.status] && (
+                    <Button className="w-full sm:w-auto" onClick={() => advance(o)}>
+                      {NEXT[o.status]!.label}
+                    </Button>
+                  )}
                 </li>
               ))}
             </ul>

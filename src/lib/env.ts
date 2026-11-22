@@ -5,6 +5,8 @@ const schema = z.object({
   GEMINI_MODEL: z.string().default("gemini-3.8-flash"),
   GOOGLE_CLOUD_PROJECT: z.string().optional(),
   FIRESTORE_ENABLED: z.enum(["true", "false"]).default("false"),
+  /** Service account JSON (raw or base64) for serverless hosts such as Vercel. */
+  FIREBASE_SERVICE_ACCOUNT: z.string().optional(),
   STAFF_PIN: z.string().min(4).default("2468"),
   RATE_LIMIT_PER_MINUTE: z.coerce.number().int().positive().default(60),
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),

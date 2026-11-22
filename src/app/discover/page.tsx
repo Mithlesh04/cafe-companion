@@ -86,7 +86,7 @@ export default function DiscoverPage() {
           ) : (
             <ul className="grid gap-3 sm:grid-cols-2">
               {data?.items.map((r) => (
-                <li key={r.item.id} className="card rise p-4 flex flex-col">
+                <li key={r.item.id} className="card animate-rise p-4 flex flex-col">
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <p className="font-semibold">{r.item.name}</p>

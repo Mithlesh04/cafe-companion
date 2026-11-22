@@ -25,11 +25,10 @@ Customers order in plain language or by voice, get picks that respect their diet
 
 ## Google technology used
 
-- **Gemini API** (`@google/genai`, model `gemini-3.8-flash` by default) for conversation with function calling, structured JSON output, classification and copywriting.
-- **Cloud Run** as the deployment target (multi-stage `Dockerfile`, non-root, standalone Next.js server).
-- **Firestore** for persistence in production (`FIRESTORE_ENABLED=true`), with an in-memory store for development and pilots.
-- **Secret Manager** for the Gemini key and staff PIN; **Cloud Build** and **Artifact Registry** in the deploy workflow.
-- **Firebase App Hosting** supported as an alternative via `apphosting.yaml`.
+- **Gemini API** (`@google/genai`, model `gemini-3.8-flash` by default, free of charge on the standard tier) for conversation with function calling, structured JSON output, classification and copywriting.
+- **Firestore** (Firebase Spark free tier) for persistence in production, with an in-memory store for development.
+- **Cloud Run** supported through the multi-stage `Dockerfile`; **Firebase App Hosting** through `apphosting.yaml`.
+- Hosting for the free deployment is **Vercel Hobby**; see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 - **Chrome Web Speech API** for voice ordering.
 
 ## Quick start
@@ -47,7 +46,7 @@ Staff view: open `/staff`, PIN `2468` (change `STAFF_PIN`), then click **Load pi
 | Command | What it does |
 |---|---|
 | `pnpm dev` / `pnpm build` / `pnpm start` | Next.js lifecycle |
-| `pnpm check` | lint, typecheck and unit tests, same as CI |
+| `pnpm check` | lint, typecheck and unit tests |
 | `pnpm test:unit` | Vitest: pure logic, API route handlers, components |
 | `pnpm test:e2e` | Playwright journeys on desktop and mobile (build first) |
 | `pnpm docker:build && pnpm docker:run` | Run the production container locally on 8080 |
@@ -63,7 +62,6 @@ src/components     UI
 tests/unit         Vitest     tests/e2e  Playwright
 docs               analysis, architecture, UX, testing, pilot, deployment
 .claude/skills     run, test, deploy, security-check, pilot-report
-.github/workflows  CI, CodeQL, Cloud Run deploy
 ```
 
 ## Documentation

@@ -16,9 +16,9 @@ export default function Home() {
   return (
     <div className="space-y-10">
       <section className="grid gap-6 pt-10 lg:grid-cols-[1.3fr_1fr] lg:items-center">
-        <div className="rise">
+        <div className="animate-rise">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta">The Café Companion</p>
-          <h1 className="mt-2 text-4xl sm:text-6xl font-semibold tracking-tight leading-[1.05]">
+          <h1 className="mt-2 text-[2.4rem] leading-[1.05] font-semibold tracking-tight sm:text-5xl lg:text-6xl">
             A café that <span className="text-terracotta">remembers</span> how you take it.
           </h1>
           <p className="mt-4 max-w-xl text-lg text-mocha">
@@ -33,7 +33,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <Card className="rise">
+        <Card className="animate-rise">
           <WaitWidget />
         </Card>
       </section>

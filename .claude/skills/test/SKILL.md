@@ -5,7 +5,7 @@ description: Run and extend the Café Companion test suite (Vitest unit/API test
 
 # Testing
 
-## Everything CI runs
+## Everything to run before a push
 ```bash
 pnpm check          # lint + typecheck + unit tests
 pnpm build && pnpm test:e2e -- --trace off

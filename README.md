@@ -2,6 +2,8 @@
 
 A smarter café experience powered by Gemini. Built for the Google Cloud Builder Pop-Up challenge.
 
+**Live demo:** https://cafe-companion-swart.vercel.app (demo mode until a Gemini key is added; staff PIN `2468`).
+
 Customers order in plain language or by voice, get picks that respect their diet and their day, see an honest wait time from the real queue, and can opt in to meet someone over coffee. The café team gets a live read of the room: mood, hot topics, and three things to do in the next fifteen minutes.
 
 | Brief theme | What we built | Where |

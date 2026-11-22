@@ -1,0 +1,10 @@
+{
+  "name": "Café Companion",
+  "short_name": "Café",
+  "description": "A smarter café experience powered by Gemini.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf6f0",
+  "theme_color": "#2b1d14",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

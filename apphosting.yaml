@@ -1,0 +1,17 @@
+# Firebase App Hosting (alternative to Cloud Run). Secrets come from Secret Manager.
+runConfig:
+  minInstances: 0
+  maxInstances: 4
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+
+env:
+  - variable: GEMINI_MODEL
+    value: gemini-3.8-flash
+  - variable: FIRESTORE_ENABLED
+    value: "true"
+  - variable: GEMINI_API_KEY
+    secret: GEMINI_API_KEY
+  - variable: STAFF_PIN
+    secret: STAFF_PIN
